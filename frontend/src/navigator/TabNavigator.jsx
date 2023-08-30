@@ -21,10 +21,6 @@ const TabNavigator = () => {
     }, 3000);
   }, []);
 
-  if (!isAppReady) {
-    return <Splash />;
-  }
-
   const navigation = useNavigation(); // Get the navigation object
 
   const handleTabPress = (tabName) => {
@@ -41,7 +37,6 @@ const TabNavigator = () => {
         borderRadius: 25,
         backgroundColor: activeTab === tabName ? "#EF5350" : "#ffffff",
         marginTop: -25,
-
       }}
       onPress={() => {
         handleTabPress(tabName);
@@ -56,6 +51,10 @@ const TabNavigator = () => {
     </TouchableOpacity>
   );
 
+  if (!isAppReady) {
+    return <Splash />;
+  }
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -63,48 +62,27 @@ const TabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Profile" // Use "Profile" as the name
+        name="Profile"
         component={UserProfileScreen}
         options={() => ({
           tabBarIcon: ({ color, size }) =>
             renderTabIcon("Profile", "person", color, size),
-          tabBarLabelStyle: {
-            fontSize: 14,
-            padding: 5,
-            marginTop: 2,
-            fontWeight: "600",
-            color: "#EF5350",
-          },
         })}
       />
       <Tab.Screen
-        name="Goals" // Use "Goals" as the name
+        name="Goals"
         component={GoalSettingScreen}
         options={() => ({
           tabBarIcon: ({ color, size }) =>
             renderTabIcon("Goals", "fitness-center", color, size),
-          tabBarLabelStyle: {
-            fontSize: 14,
-            padding: 5,
-            marginTop: 2,
-            fontWeight: "600",
-            color: "#EF5350",
-          },
         })}
       />
       <Tab.Screen
-        name="Workout" // Use "Workout" as the name
+        name="Workout"
         component={WorkoutLogScreen}
         options={() => ({
           tabBarIcon: ({ color, size }) =>
             renderTabIcon("Workout", "directions-run", color, size),
-          tabBarLabelStyle: {
-            fontSize: 14,
-            padding: 5,
-            marginTop: 2,
-            fontWeight: "600",
-            color: "#EF5350",
-          },
         })}
       />
     </Tab.Navigator>
