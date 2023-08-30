@@ -8,6 +8,7 @@ import UserProfileScreen from "../screens/UserProfileScreen";
 import GoalSettingScreen from "../screens/GoalSettingScreen";
 import WorkoutLogScreen from "../screens/WorkoutLogScreen";
 import Splash from "../screens/Splash";
+import ProgressTrackingScreen from "../screens/ProgressTrackingScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -59,6 +60,11 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarLabelStyle: {
+          fontSize:12,
+          fontWeight:"700",
+          marginBottom:5
+        }
       }}
     >
       <Tab.Screen
@@ -83,6 +89,14 @@ const TabNavigator = () => {
         options={() => ({
           tabBarIcon: ({ color, size }) =>
             renderTabIcon("Workout", "directions-run", color, size),
+        })}
+      />
+      <Tab.Screen
+        name="Progress" // Name for the Progress screen
+        component={ProgressTrackingScreen} // Use your actual ProgressTrackingScreen component
+        options={() => ({
+          tabBarIcon: ({ color, size }) =>
+            renderTabIcon("Progress", "trending-up", color, size, 0), // Set progress as needed
         })}
       />
     </Tab.Navigator>

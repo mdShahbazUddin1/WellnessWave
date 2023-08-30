@@ -1,25 +1,58 @@
-// src/screens/GoalSettingScreen.js
-import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  Animated,
+} from "react-native";
 
 const GoalSettingScreen = ({ navigation }) => {
-  const [goal, setGoal] = useState("");
+  const [goalType, setGoalType] = useState("");
+  const [goalTarget, setGoalTarget] = useState("");
+  const [error, setError] = useState("");
+  const fadeInAnim = new Animated.Value(0);
+
+  useEffect(() => {
+    Animated.timing(fadeInAnim, {
+      toValue: 1,
+      duration: 1000, // Adjust the duration as needed
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   const handleSaveGoal = () => {
-    // You can add logic here to save the user's goal
-    navigation.goBack(); // Navigate back to the previous screen
+    if (goalType.trim() === "" || goalTarget.trim() === "") {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    // Handle saving the goal data
+    // ...
+
+    navigation.goBack(); // Navigate back after saving
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Goal Setting</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your goal"
-        value={goal}
-        onChangeText={setGoal}
-      />
-      <Button title="Save Goal" onPress={handleSaveGoal} />
+      <Animated.View style={[styles.formContainer, { opacity: fadeInAnim }]}>
+        <Text style={styles.title}>Set Your Fitness Goal</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Goal Type (e.g. Weight Loss)"
+          value={goalType}
+          onChangeText={setGoalType}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Goal Target (e.g. 10 kg)"
+          value={goalTarget}
+          onChangeText={setGoalTarget}
+        />
+        <Text style={styles.errorText}>{error}</Text>
+        <Button title="Save Goal" onPress={handleSaveGoal} />
+      </Animated.View>
     </View>
   );
 };
@@ -27,19 +60,31 @@ const GoalSettingScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
+  },
+  formContainer: {
+    backgroundColor: "#ffffff",
+    padding: 20,
+    borderRadius: 10,
+    elevation: 3,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 20,
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   input: {
-    marginBottom: 10,
-    padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
   },
 });
 
