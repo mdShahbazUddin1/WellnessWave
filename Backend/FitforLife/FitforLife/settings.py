@@ -110,7 +110,7 @@ MONGO_USERNAME = 'jackayron5'
 MONGO_PASSWORD = '9931797391'
 MONGO_CLUSTER_NAME = 'wellness'
 
-MONGO_URI = f'mongodb+srv://jackayron5:9931797391@cluster0.xrv0a3m.mongodb.net/wellness?retryWrites=true&w=majority'
+MONGO_URI = f'mongodb+srv://jackayron5:9931797391@cluster0.ytw9ur1.mongodb.net/wellness?retryWrites=true&w=majority'
 
 mongoengine.connect(host=MONGO_URI, db=MONGO_DBNAME)
 
